@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>R12 Football Academy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a2e 0%, #0d47a1 50%, #1565c0 100%);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .logo-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1976d2, #42a5f5);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      box-shadow: 0 0 40px rgba(66,165,245,0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(66,165,245,0.4); }
+      50% { box-shadow: 0 0 60px rgba(66,165,245,0.8); }
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: #90caf9;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 20px 12px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+
+    .feature-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e3f2fd;
+    }
+
+    .download-section {
+      margin-bottom: 40px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 30px rgba(67,160,71,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .download-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 40px rgba(67,160,71,0.7);
+      animation: none;
+    }
+
+    .download-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      color: #b3e5fc;
+    }
+
+    .steps {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .steps h3 {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #90caf9;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .step-num {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1976d2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .step-text {
+      font-size: 0.95rem;
+      color: #e3f2fd;
+      line-height: 1.5;
+      padding-top: 4px;
+    }
+
+    .footer {
+      color: #64b5f6;
+      font-size: 0.85rem;
+      padding-bottom: 20px;
+    }
+
+    .football {
+      display: inline-block;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <div class="logo-circle">
+    <span class="football">⚽</span>
+  </div>
+
+  <h1>R12 Football Academy</h1>
+  <p class="tagline">Developing Champions — Academy Management App</p>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">👨‍🎓</div>
+      <div class="feature-title">Students Management</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div class="feature-title">Attendance Tracking</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Fees Management</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📄</div>
+      <div class="feature-title">PDF Reports</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☁️</div>
+      <div class="feature-title">Cloud Sync</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Google Login</div>
+    </div>
+  </div>
+
+  <div class="download-section">
+    <a href="app-debug.apk" class="download-btn" download>
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
+      Download App
+    </a>
+
+    <div class="badge-row">
+      <span class="badge">Android 6.0+</span>
+      <span class="badge">Free</span>
+      <span class="badge">Offline Support</span>
+      <span class="badge">v1.0</span>
+    </div>
+  </div>
+
+  <div class="steps">
+    <h3>How to Install</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Click the Download button above to download the APK file</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Open your phone Settings → Security → Enable "Install from Unknown Sources"</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Open the downloaded APK file from your Downloads folder</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Tap Install and wait for it to finish</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-text">Open the app and Sign In with your Google account</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 R12 Football Academy · Built with ❤️ for Champions
+  </div>
+
+</div>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 3 + 1;
+    star.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${Math.random() * 100}%;
+      animation-delay: ${Math.random() * 3}s;
+      animation-duration: ${2 + Math.random() * 3}s;
+    `;
+    starsContainer.appendChild(star);
+  }
+</script>
+
+</body>
+</html>
